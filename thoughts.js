@@ -17,7 +17,6 @@ class Thoughts extends Mind {
       .filter(thing => thing.shouldThink())
       .forEach(thing => thing.think());
   }
-
 }
 
 class Thing {
@@ -28,7 +27,7 @@ class Thing {
 
   shouldThink() {
     /**
-     * Philippianss 4:8-9, ESV
+     * Philippians 4:8-9, ESV
      * Finally, brothers, whatever is true, whatever is honorable, whatever is just, 
      * whatever is pure, whatever is lovely, whatever is commendable, if there is any 
      * excellence, if there is anything worthy of praise, think about these things. 
