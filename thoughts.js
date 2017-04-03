@@ -7,13 +7,15 @@ const TRUE = 'true',
       EXCELLENT = 'excellent',
       PRAISEWORTHY = 'praiseworthy';
 
-class Thoughts {
+class Thoughts extends Mind {
   constructor(thoughts) {
     this.thoughts = thoughts;
   }
 
   think() {
-    this.thoughts.filter(thought => thought.shouldThink())
+    this.thoughts
+      .filter(thing => thing.shouldThink())
+      .forEach(thing => thing.think());
   }
 
 }
@@ -33,15 +35,20 @@ class Thing {
      * What you have learned and received and heard and seen in me—practice these things, 
      * and the God of peace will be with you.
      */
-    return this.attributes.filter(attr => attr == TRUE || 
-                                          attr == HONORABLE ||
-                                          attr == JUST ||
-                                          attr == PURE ||
-                                          attr == LOVELY ||
-                                          attr == COMMENDABLE ||
-                                          attr == EXCELLENT ||
-                                          attr == PRAISEWORTHY
-                                          ).length > 0;
+    return this.attributes
+      .filter(attr => attr == TRUE || 
+                      attr == HONORABLE ||
+                      attr == JUST ||
+                      attr == PURE ||
+                      attr == LOVELY ||
+                      attr == COMMENDABLE ||
+                      attr == EXCELLENT ||
+                      attr == PRAISEWORTHY)
+      .length > 0;
+  }
+
+  think() {
+    console.log(this.thing);
   }
 }
 
