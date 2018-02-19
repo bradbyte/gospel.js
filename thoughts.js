@@ -7,25 +7,35 @@ const TRUE = 'true',
       EXCELLENT = 'excellent',
       PRAISEWORTHY = 'praiseworthy';
 
-class Thoughts extends Mind {
+class Mind {
   constructor(thoughts) {
     this.thoughts = thoughts;
   }
-
+  
   think() {
     this.thoughts
-      .filter(thing => thing.shouldThink())
+      .filter(thing => this.shouldThink(thing))
       .forEach(thing => thing.think());
   }
 }
 
-class Thing {
-  constructor(thing, attributes) {
-    this.thing = thing;
-    this.attributes = attributes;
+/**
+ * Romans 8:7, ESV
+ * For the mind that is set on the flesh is hostile to God, for it does not submit to 
+ * God's law; indeed, it cannot.
+ */
+class FleshlyMind extends Mind {
+  shouldThink(thought) {
+    return true;
   }
+}
 
-  shouldThink() {
+/**
+ * Philippians 2:5, NKJV
+ * Let this mind be in you which was also in Christ Jesus.
+ */
+class ChristMind extends Mind {
+  shouldThink(thought) {
     /**
      * Philippians 4:8-9, ESV
      * Finally, brothers, whatever is true, whatever is honorable, whatever is just, 
@@ -34,7 +44,7 @@ class Thing {
      * What you have learned and received and heard and seen in me—practice these things, 
      * and the God of peace will be with you.
      */
-    return this.attributes
+    return thought.attributes
       .filter(attr => attr == TRUE || 
                       attr == HONORABLE ||
                       attr == JUST ||
@@ -45,11 +55,20 @@ class Thing {
                       attr == PRAISEWORTHY)
       .length > 0;
   }
+}
+
+class Thought {
+  constructor(thing, attributes) {
+    this.thing = thing;
+    this.attributes = attributes;
+  }
 
   think() {
     console.log(this.thing);
   }
 }
 
-exports.Thoughts = Thoughts;
+exports.Mind = Mind;
+exports.FleshlyMind = FleshlyMind;
+exports.ChristMind = ChristMind;
 exports.Thought = Thought;
